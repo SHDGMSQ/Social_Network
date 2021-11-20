@@ -5,7 +5,7 @@ import s from './Dialogs.module.css'
 const Dialogs = (props: any) => {
     return (
         <div>
-            Dialogs
+            Dialogs + 1
         </div>
     )
 }
