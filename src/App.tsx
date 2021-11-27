@@ -10,6 +10,7 @@ import News from "./components/News/News";
 import Setings from "./components/Setings/Setings";
 
 
+
 const App = (props: any) => {
     return (
         <BrowserRouter>

@@ -12,5 +12,8 @@
 }
 
 .messages .message {
-
+    color: gold;
+}
+.dialog a {
+    color: yellow;
 }
