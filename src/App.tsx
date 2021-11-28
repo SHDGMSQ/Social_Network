@@ -11,6 +11,10 @@ import Setings from "./components/Setings/Setings";
 
 
 
+let m
+
+
+
 const App = (props: any) => {
     return (
         <BrowserRouter>
@@ -19,11 +23,11 @@ const App = (props: any) => {
                 <Navbar/>
                 <div className="app-wrapper-content">
                     <Routes>
-                        <Route path='/profile' element={<Profile/>}/>
-                        <Route path='/dialogs' element={<Dialogs/>}/>
-                        <Route path='/news' element={<News/>}/>
-                        <Route path='/music' element={<Music/>}/>
-                        <Route path='/settings' element={<Setings/>}/>
+                        <Route path='/profile' element={<Profile />}/>
+                        <Route path='/dialogs' element={<Dialogs />}/>
+                        <Route path='/news' element={<News />}/>
+                        <Route path='/music' element={<Music />}/>
+                        <Route path='/settings' element={<Setings />}/>
                     </Routes>
                 </div>
             </div>
