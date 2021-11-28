@@ -11,7 +11,7 @@ import Setings from "./components/Setings/Setings";
 
 
 
-let m
+
 
 
 
