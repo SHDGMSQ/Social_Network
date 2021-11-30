@@ -1,7 +1,9 @@
 import React from "react";
 import s from './Settings.module.css'
 
-const Setings = (props:any) => {
+export type SettingsType = {}
+
+const Settings: React.FC<SettingsType> = (props) => {
     return (
         <div>
             Settings
@@ -9,4 +11,4 @@ const Setings = (props:any) => {
     )
 }
 
-export default Setings;
+export default Settings;

@@ -2,8 +2,13 @@ import React from 'react';
 import s from './Profile.module.css'
 import MyPosts from "./MyPosts/MyPosts";
 import ProfileInfo from "./ProfileInfo/ProfileInfo";
+import {PostType} from "./MyPosts/Post/Post";
 
-const Profile = (props: any) => {
+export type ProfileType = {
+    posts: Array<PostType>
+}
+
+const Profile: React.FC<ProfileType> = (props) => {
     return (
         <div className={s.content}>
             <ProfileInfo />
