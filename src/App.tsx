@@ -13,10 +13,28 @@ import {DialogItemType} from "./components/Dialogs/DialogItem/DialogItem";
 import {MessagesType} from "./components/Dialogs/Message/Message";
 
 
-type AppType = {
+export type ProfilePageType = {
     posts: Array<PostType>
+}
+export type DialogsPageType = {
     dialogs: Array<DialogItemType>
     messages: Array<MessagesType>
+}
+export type SidebarType = {
+    friends: Array<SidebarFriendsType>
+}
+export type SidebarFriendsType = {
+    id: number
+    name: string
+}
+export type StateType = {
+    profilePage: ProfilePageType
+    dialogsPage: DialogsPageType
+    sidebar: SidebarType
+}
+
+export type AppType = {
+    state: StateType
 }
 
 
@@ -25,15 +43,15 @@ const App: React.FC<AppType> = (props) => {
         <BrowserRouter>
             <div className='app-wrapper'>
                 <Header/>
-                <Navbar/>
+                <Navbar state={props.state.sidebar}/>
                 <div className="app-wrapper-content">
                     <Routes>
                         <Route
                             path='/profile'
-                            element={<Profile posts={props.posts}/>}/>
+                            element={<Profile state={props.state.profilePage}/>}/>
                         <Route
                             path='/dialogs'
-                            element={<Dialogs dialogs={props.dialogs} messages={props.messages}/>}/>
+                            element={<Dialogs state={props.state.dialogsPage}/>}/>
                         <Route
                             path='/news'
                             element={<News/>}/>
