@@ -26,6 +26,7 @@ export type SidebarType = {
 export type SidebarFriendsType = {
     id: number
     name: string
+    avatar: object
 }
 export type StateType = {
     profilePage: ProfilePageType

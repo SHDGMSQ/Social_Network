@@ -13,7 +13,7 @@ export type DialogsType = {
 const Dialogs: React.FC<DialogsType> = (props) => {
 
 
-let dialogsElements = props.state.dialogs.map(d => <DialogItem name={d.name} id={d.id} />)
+let dialogsElements = props.state.dialogs.map(d => <DialogItem name={d.name} id={d.id} avatar={d.avatar}/>)
 let messagesElements = props.state.messages.map(m => <Message message={m.message} />)
 
 

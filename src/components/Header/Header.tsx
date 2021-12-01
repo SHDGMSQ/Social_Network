@@ -6,7 +6,7 @@ export type HeaderType = {}
 const Header: React.FC<HeaderType> = () => {
     return (
         <header className={s.header}>
-            <img src='https://png.pngtree.com/element_pic/00/16/07/06577d261edb9ec.jpg'/>
+            <img src='https://e7.pngegg.com/pngimages/518/586/png-clipart-computer-icons-earth-logo-earth-globe-monochrome.png'/>
         </header>
     )
 }
