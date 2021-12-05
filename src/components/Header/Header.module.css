@@ -1,11 +1,12 @@
 .header img {
-    width: 105px;
+    width: 60px;
+    padding-left: 10px;
+
 
 }
 
 .header {
     grid-area: h;
     background-color: #26302f;
-
 
 }

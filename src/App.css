@@ -2,10 +2,11 @@
     display: grid;
     width: 1200px;
     margin: 0 auto;
+    background-color: #d9d9d9;
 
     grid-template-rows: 60px 10fr;
     grid-template-columns: 2fr 10fr;
-    /*grid-gap: 10px;*/
+    grid-gap: 10px;
     grid-template-areas:
     "h h"
     "n c"

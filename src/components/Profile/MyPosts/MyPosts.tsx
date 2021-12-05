@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {RefObject} from 'react';
 import s from './MyPosts.module.css'
 import Post, {PostType} from "./Post/Post";
 
@@ -9,18 +9,23 @@ export type MyPostsType = {
 const MyPosts: React.FC<MyPostsType> = (props) => {
 
 
-let postsElements = props.posts.map(p => <Post message={p.message} likesCount={p.likesCount} />)
+    let postsElements = props.posts.map(p => <Post message={p.message} likesCount={p.likesCount}/>)
 
+    const addPost = () => {
+        let text = newPostValue.current?.value;
+        alert(text)
+    }
+    let newPostValue: RefObject<HTMLTextAreaElement> = React.createRef()
 
     return (
         <div className={s.postsBlock}>
             <h3>My Posts</h3>
             <div>
                 <div>
-                    <textarea></textarea>
+                    <textarea ref={newPostValue}></textarea>
                 </div>
                 <div>
-                    <button>Add Post</button>
+                    <button onClick={addPost}>Add Post</button>
                 </div>
             </div>
             <div className={s.posts}>
