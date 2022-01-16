@@ -11,6 +11,7 @@ import Settings from "./components/Settings/Settings";
 import {PostType} from "./components/Profile/MyPosts/Post/Post";
 import {DialogItemType} from "./components/Dialogs/DialogItem/DialogItem";
 import {MessagesType} from "./components/Dialogs/Message/Message";
+import {addPost} from "./redux/state";
 
 
 export type ProfilePageType = {
@@ -49,7 +50,10 @@ const App: React.FC<AppType> = (props) => {
                     <Routes>
                         <Route
                             path='/profile'
-                            element={<Profile state={props.state.profilePage}/>}/>
+                            element={<Profile
+                                state={props.state.profilePage}
+                                addPost={addPost}
+                            />}/>
                         <Route
                             path='/dialogs'
                             element={<Dialogs state={props.state.dialogsPage}/>}/>

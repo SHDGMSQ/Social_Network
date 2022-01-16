@@ -20,7 +20,7 @@ const addMessage = () => {
     let textMessage = newTextMessage.current?.value
     alert(textMessage)
 }
-let newTextMessage: RefObject<HTMLTextAreaElement> = React.createRef()
+let newTextMessage = React.createRef<HTMLTextAreaElement>()
 
 
     return (

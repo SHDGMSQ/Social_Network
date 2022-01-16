@@ -1,9 +1,10 @@
-import React, {RefObject} from 'react';
+import React, {KeyboardEvent} from 'react';
 import s from './MyPosts.module.css'
 import Post, {PostType} from "./Post/Post";
 
 export type MyPostsType = {
     posts: Array<PostType>
+    addPost: (message: string) => void
 }
 
 const MyPosts: React.FC<MyPostsType> = (props) => {
@@ -13,9 +14,11 @@ const MyPosts: React.FC<MyPostsType> = (props) => {
 
     const addPost = () => {
         let text = newPostValue.current?.value;
-        alert(text)
-    }
-    let newPostValue: RefObject<HTMLTextAreaElement> = React.createRef()
+        if (text){
+        props.addPost(text)
+    }}
+    let newPostValue = React.createRef<HTMLTextAreaElement>()
+
 
     return (
         <div className={s.postsBlock}>

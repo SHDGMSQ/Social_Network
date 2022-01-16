@@ -29,4 +29,11 @@ let state = {
         ]
     }
 }
+
+export let addPost = (message: string) => {
+    let newPost = {id: 3, message, likesCount: 0}
+    state.profilePage.posts.push(newPost)
+    console.log(state.profilePage.posts)
+}
+
 export default state
