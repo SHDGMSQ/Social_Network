@@ -4,6 +4,7 @@ import Post, {PostType} from "./Post/Post";
 
 export type MyPostsType = {
     posts: Array<PostType>
+    newPostText: string
     addPost: (message: string) => void
     addTitleValue: (title: string) => void
 }
@@ -19,8 +20,6 @@ const MyPosts: React.FC<MyPostsType> = (props) => {
         if (text){
         props.addPost(text);
     }
-        // @ts-ignore
-        newPostValue.current.value = ''
     }
     const onChangeTextareaHandler = (e:ChangeEvent<HTMLTextAreaElement>) =>{props.addTitleValue(e.currentTarget.value)}
     let newPostValue = React.createRef<HTMLTextAreaElement>()
@@ -33,7 +32,8 @@ const MyPosts: React.FC<MyPostsType> = (props) => {
                 <div>
                     <textarea ref={newPostValue}
                               onChange={onChangeTextareaHandler}
-                    ></textarea>
+                              value={props.newPostText}
+                    />
                 </div>
                 <div>
                     <button onClick={addPost}>Add Post</button>

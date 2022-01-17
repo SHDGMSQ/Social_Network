@@ -17,6 +17,7 @@ const Profile: React.FC<ProfileType> = (props) => {
             <ProfileInfo />
             <MyPosts
                 posts={props.state.posts}
+                newPostText={props.state.newPostText}
                 addPost={props.addPost}
                 addTitleValue={props.addTitleValue}
             />

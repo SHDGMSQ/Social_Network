@@ -16,6 +16,7 @@ import {addPost} from "./redux/state";
 
 export type ProfilePageType = {
     posts: Array<PostType>
+    newPostText: string
 }
 export type DialogsPageType = {
     dialogs: Array<DialogItemType>
