@@ -8,6 +8,7 @@ import {ProfilePageType} from "../../App";
 export type ProfileType = {
     state: ProfilePageType
     addPost: (message: string) => void
+    addTitleValue: (title: string) => void
 }
 
 const Profile: React.FC<ProfileType> = (props) => {
@@ -17,6 +18,7 @@ const Profile: React.FC<ProfileType> = (props) => {
             <MyPosts
                 posts={props.state.posts}
                 addPost={props.addPost}
+                addTitleValue={props.addTitleValue}
             />
         </div>
     )

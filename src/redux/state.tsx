@@ -1,3 +1,4 @@
+import {rerenderEntireTree} from "../rerenderEntireTree";
 
 
 let state = {
@@ -33,7 +34,12 @@ let state = {
 export let addPost = (message: string) => {
     let newPost = {id: 3, message, likesCount: 0}
     state.profilePage.posts.push(newPost)
-    console.log(state.profilePage.posts)
+    rerenderEntireTree(state)
+}
+export let addTitleValue = (message: string) => {
+    let newPost = {id: 4, message, likesCount: 0}
+    rerenderEntireTree(state)
+    console.log(newPost)
 }
 
 export default state
