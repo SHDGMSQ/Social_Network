@@ -7,8 +7,7 @@ import {ProfilePageType} from "../../App";
 
 export type ProfileType = {
     state: ProfilePageType
-    addPost: () => void
-    addTitleValue: (title: string) => void
+    dispatch: (action: {type: string, message?: string}) => void
 }
 
 const Profile: React.FC<ProfileType> = (props) => {
@@ -18,8 +17,7 @@ const Profile: React.FC<ProfileType> = (props) => {
             <MyPosts
                 posts={props.state.posts}
                 newPostText={props.state.newPostText}
-                addPost={props.addPost}
-                addTitleValue={props.addTitleValue}
+                dispatch={props.dispatch}
             />
         </div>
     )

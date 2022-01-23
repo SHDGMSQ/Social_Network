@@ -66,9 +66,8 @@ let store = {
     getState() {
         return this._state
     },
-    _callSubscriber (state) {
-    },
-    addPost() {
+    _callSubscriber (state) {},
+    /*addPost() {
         let newPost = {id: 3, message: this._state.profilePage.newPostText, likesCount: 0}
         this._state.profilePage.posts.push(newPost);
         this._state.profilePage.newPostText = ''
@@ -77,9 +76,21 @@ let store = {
     addTitleValue(message: string) {
         this._state.profilePage.newPostText = message;
         this._callSubscriber(this._state)
-    },
+    },*/
     subscribe(observer) {
         this._callSubscriber = observer
+    },
+    dispatch (action) {
+        if (action.type === 'ADD-POST') {
+            let newPost = {id: 3, message: this._state.profilePage.newPostText, likesCount: 0}
+            this._state.profilePage.posts.push(newPost);
+            this._state.profilePage.newPostText = ''
+            this._callSubscriber(this._state)
+        }
+        else if (action.type === 'ADD-TITLE-VALUE') {
+            this._state.profilePage.newPostText = action.message;
+            this._callSubscriber(this._state)
+        }
     }
 }
 export default store

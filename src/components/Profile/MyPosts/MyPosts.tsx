@@ -5,8 +5,7 @@ import Post, {PostType} from "./Post/Post";
 export type MyPostsType = {
     posts: Array<PostType>
     newPostText: string
-    addPost: () => void
-    addTitleValue: (title: string) => void
+    dispatch: (action: {type: string, message?: string}) => void
 }
 
 const MyPosts: React.FC<MyPostsType> = (props) => {
@@ -15,9 +14,12 @@ const MyPosts: React.FC<MyPostsType> = (props) => {
     let postsElements = props.posts.map(p => <Post message={p.message} likesCount={p.likesCount}/>)
 
     const addPost = () => {
-        props.addPost();
+        props.dispatch({type: 'ADD-POST'});
     }
-    const onChangeTextareaHandler = (e:ChangeEvent<HTMLTextAreaElement>) =>{props.addTitleValue(e.currentTarget.value)}
+    const onChangeTextareaHandler = (e:ChangeEvent<HTMLTextAreaElement>) =>{
+        let message = e.currentTarget.value
+        props.dispatch({type: 'ADD-TITLE-VALUE', message: message})
+    }
     let newPostValue = React.createRef<HTMLTextAreaElement>()
 
 

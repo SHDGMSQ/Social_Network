@@ -38,8 +38,7 @@ export type StateType = {
 
 export type AppType = {
     state: StateType
-    addPost: () => void
-    addTitleValue: (title) => void
+    dispatch: (action: {type: string, message?: string}) => void
 }
 
 
@@ -55,8 +54,7 @@ const App: React.FC<AppType> = (props) => {
                             path='/profile'
                             element={<Profile
                                 state={props.state.profilePage}
-                                addPost={props.addPost}
-                                addTitleValue={props.addTitleValue}
+                                dispatch={props.dispatch}
                             />}/>
                         <Route
                             path='/dialogs'
