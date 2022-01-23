@@ -11,7 +11,7 @@ import Settings from "./components/Settings/Settings";
 import {PostType} from "./components/Profile/MyPosts/Post/Post";
 import {DialogItemType} from "./components/Dialogs/DialogItem/DialogItem";
 import {MessagesType} from "./components/Dialogs/Message/Message";
-import {addPost} from "./redux/state";
+
 
 
 export type ProfilePageType = {
@@ -38,7 +38,7 @@ export type StateType = {
 
 export type AppType = {
     state: StateType
-    addPost: (message) => void
+    addPost: () => void
     addTitleValue: (title) => void
 }
 

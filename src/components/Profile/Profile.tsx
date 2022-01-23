@@ -7,7 +7,7 @@ import {ProfilePageType} from "../../App";
 
 export type ProfileType = {
     state: ProfilePageType
-    addPost: (message: string) => void
+    addPost: () => void
     addTitleValue: (title: string) => void
 }
 

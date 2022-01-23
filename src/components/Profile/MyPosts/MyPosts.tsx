@@ -5,7 +5,7 @@ import Post, {PostType} from "./Post/Post";
 export type MyPostsType = {
     posts: Array<PostType>
     newPostText: string
-    addPost: (message: string) => void
+    addPost: () => void
     addTitleValue: (title: string) => void
 }
 
@@ -15,11 +15,7 @@ const MyPosts: React.FC<MyPostsType> = (props) => {
     let postsElements = props.posts.map(p => <Post message={p.message} likesCount={p.likesCount}/>)
 
     const addPost = () => {
-        // @ts-ignore
-        let text = newPostValue.current.value;
-        if (text){
-        props.addPost(text);
-    }
+        props.addPost();
     }
     const onChangeTextareaHandler = (e:ChangeEvent<HTMLTextAreaElement>) =>{props.addTitleValue(e.currentTarget.value)}
     let newPostValue = React.createRef<HTMLTextAreaElement>()
