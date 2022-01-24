@@ -1,27 +1,28 @@
-import React, {RefObject} from "react";
+import React, {ChangeEvent} from "react";
 import s from './Dialogs.module.css'
 import DialogItem from "./DialogItem/DialogItem";
 import Message from "./Message/Message";
-import {DialogsPageType} from "../../App";
-
+import {sendMessageAC, updateNewMessageBodyAC} from "../../redux/state";
 
 
 export type DialogsType = {
-    state: DialogsPageType
+    store: any
 }
 
 const Dialogs: React.FC<DialogsType> = (props) => {
 
+    let state = props.store.getState().dialogsPage
 
-let dialogsElements = props.state.dialogs.map(d => <DialogItem name={d.name} id={d.id} avatar={d.avatar}/>)
-let messagesElements = props.state.messages.map(m => <Message message={m.message} />)
-
-const addMessage = () => {
-    let textMessage = newTextMessage.current?.value
-    alert(textMessage)
-}
-let newTextMessage = React.createRef<HTMLTextAreaElement>()
-
+    let dialogsElements = state.dialogs.map(d => <DialogItem name={d.name} id={d.id} avatar={d.avatar}/>)
+    let messagesElements = state.messages.map(m => <Message message={m.message}/>)
+    let newMessageBody =  state.newMessageBody
+    const onSendMessageClick = () => {
+        props.store.dispatch(sendMessageAC())
+    }
+    let onNewMessageChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
+        let body = e.currentTarget.value
+        props.store.dispatch(updateNewMessageBodyAC(body))
+    }
 
     return (
         <div>
@@ -30,12 +31,15 @@ let newTextMessage = React.createRef<HTMLTextAreaElement>()
                     {dialogsElements}
                 </div>
                 <div className={s.messages}>
-                    {messagesElements}
+                    <div> {messagesElements}</div>
                     <div>
-                        <textarea ref={newTextMessage}></textarea>
+                        <textarea value={newMessageBody}
+                                  onChange={onNewMessageChange}
+                                  placeholder='Enter your message'
+                        ></textarea>
                     </div>
                     <div>
-                        <button onClick={addMessage}>Add</button>
+                        <button onClick={onSendMessageClick}>Send</button>
                     </div>
                 </div>
             </div>
@@ -44,3 +48,6 @@ let newTextMessage = React.createRef<HTMLTextAreaElement>()
     )
 }
 export default Dialogs;
+
+
+
