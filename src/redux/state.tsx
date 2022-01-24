@@ -88,11 +88,33 @@ let store = {
             this._callSubscriber(this._state)
         }
         else if (action.type === 'ADD-TITLE-VALUE') {
-            this._state.profilePage.newPostText = action.message;
+            this._state.profilePage.newPostText = action.preload.message;
             this._callSubscriber(this._state)
         }
     }
 }
+
+export type GeneralType = addPostACType
+| addTitleValueACType
+
+type addPostACType = ReturnType<typeof addPostAC>
+export const addPostAC = () => {
+    return {
+        type: 'ADD-POST',
+        preload: {}
+    } as const
+}
+
+type addTitleValueACType = ReturnType<typeof addTitleValueAC>
+export const addTitleValueAC = (message: string) => {
+    return {
+        type: 'ADD-TITLE-VALUE',
+        preload: {
+            message
+        }
+    } as const
+}
+
 export default store
 
 /*let rerenderEntireTree = (state) => {
