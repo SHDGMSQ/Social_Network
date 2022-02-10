@@ -12,7 +12,6 @@ import {PostType} from "./components/Profile/MyPosts/Post/Post";
 import {DialogItemType} from "./components/Dialogs/DialogItem/DialogItem";
 import {MessagesType} from "./components/Dialogs/Message/Message";
 
-//init commit
 
 export type ProfilePageType = {
     posts: Array<PostType>
