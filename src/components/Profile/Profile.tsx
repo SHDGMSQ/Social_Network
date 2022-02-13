@@ -1,13 +1,13 @@
 import React from 'react';
 import s from './Profile.module.css'
-import MyPosts from "./MyPosts/MyPosts";
 import ProfileInfo from "./ProfileInfo/ProfileInfo";
 
-import {ProfilePageType} from "../../App";
-import {GeneralType} from "../../redux/store";
+
+import {GeneralType, StoreType} from "../../redux/store";
+import MyPostsContainer from "./MyPosts/MyPostsContainer";
 
 export type ProfileType = {
-    state: ProfilePageType
+    store: StoreType
     dispatch: (action: GeneralType) => void
 }
 
@@ -15,10 +15,8 @@ const Profile: React.FC<ProfileType> = (props) => {
     return (
         <div className={s.content}>
             <ProfileInfo />
-            <MyPosts
-                posts={props.state.posts}
-                newPostText={props.state.newPostText}
-                dispatch={props.dispatch}
+            <MyPostsContainer
+                store={props.store}
             />
         </div>
     )

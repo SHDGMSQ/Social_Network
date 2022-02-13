@@ -12,6 +12,7 @@ import {PostType} from "./components/Profile/MyPosts/Post/Post";
 import {DialogItemType} from "./components/Dialogs/DialogItem/DialogItem";
 import {MessagesType} from "./components/Dialogs/Message/Message";
 import {GeneralType, StoreType} from "./redux/store";
+import DialogsContainer from "./components/Dialogs/DialogsContainer";
 //wefwef
 
 export type ProfilePageType = {
@@ -54,12 +55,12 @@ const App: React.FC<AppType> = (props) => {
                         <Route
                             path='/profile'
                             element={<Profile
-                                state={props.state.profilePage}
+                                store={props.store}
                                 dispatch={props.dispatch}
                             />}/>
                         <Route
                             path='/dialogs'
-                            element={<Dialogs store={props.store}/>}/>
+                            element={<DialogsContainer store={props.store}/>}/>
                         <Route
                             path='/news'
                             element={<News/>}/>
