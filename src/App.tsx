@@ -40,8 +40,6 @@ export type StateType = {
 
 export type AppType = {
     state: StateType
-    dispatch: (action: GeneralType) => void
-    store: any
 }
 
 
@@ -54,13 +52,10 @@ const App: React.FC<AppType> = (props) => {
                     <Routes>
                         <Route
                             path='/profile'
-                            element={<Profile
-                                store={props.store}
-                                dispatch={props.dispatch}
-                            />}/>
+                            element={<Profile />}/>
                         <Route
                             path='/dialogs'
-                            element={<DialogsContainer store={props.store}/>}/>
+                            element={<DialogsContainer />}/>
                         <Route
                             path='/news'
                             element={<News/>}/>

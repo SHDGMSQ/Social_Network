@@ -11,6 +11,7 @@ export type NavbarType = {
 
 const Navbar: React.FC<NavbarType> = (props) => {
 
+
     let friendsElement = props.state.friends.map(f => <Friends name={f.name} avatar={f.avatar}/>)
 
     return (
