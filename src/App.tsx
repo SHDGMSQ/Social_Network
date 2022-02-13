@@ -11,6 +11,7 @@ import Settings from "./components/Settings/Settings";
 import {PostType} from "./components/Profile/MyPosts/Post/Post";
 import {DialogItemType} from "./components/Dialogs/DialogItem/DialogItem";
 import {MessagesType} from "./components/Dialogs/Message/Message";
+import {GeneralType, StoreType} from "./redux/store";
 //wefwef
 
 export type ProfilePageType = {
@@ -38,7 +39,7 @@ export type StateType = {
 
 export type AppType = {
     state: StateType
-    dispatch: (action: {type: string, message?: string}) => void
+    dispatch: (action: GeneralType) => void
     store: any
 }
 

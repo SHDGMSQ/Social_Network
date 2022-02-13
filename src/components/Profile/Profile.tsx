@@ -4,10 +4,11 @@ import MyPosts from "./MyPosts/MyPosts";
 import ProfileInfo from "./ProfileInfo/ProfileInfo";
 
 import {ProfilePageType} from "../../App";
+import {GeneralType} from "../../redux/store";
 
 export type ProfileType = {
     state: ProfilePageType
-    dispatch: (action: {type: string, message?: string}) => void
+    dispatch: (action: GeneralType) => void
 }
 
 const Profile: React.FC<ProfileType> = (props) => {
