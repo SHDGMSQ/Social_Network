@@ -27,10 +27,12 @@ export const dialogsReducer = (state: DialogsPageType = initialState, action: Ge
             return copyState
         }
         case SEND_MESSAGE: {
-            let body = state.newMessageBody
-            state.messages.push({id: 6, message: body})
-            state.newMessageBody = ''
-            return state
+            let copyState = {...state}
+            let body = copyState.newMessageBody
+            copyState.messages = [...state.messages]
+            copyState.messages.push({id: 6, message: body})
+            copyState.newMessageBody = ''
+            return copyState
         }
         default: return state
     }
