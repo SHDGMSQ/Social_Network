@@ -5,7 +5,7 @@ const UPDATE_NEW_MESSAGE_BODY = 'UPDATE-NEW-MESSAGE-BODY'
 const SEND_MESSAGE = 'SEND-MESSAGE'
 
 
-let initialState = {
+let initialState: DialogsPageType = {
     dialogs: [
         {id: 1, name: 'Dima', avatar: <img src='https://klike.net/uploads/posts/2019-03/1551511801_1.jpg'/>},
         {id: 2, name: 'Andrew', avatar: <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTBoOxv-DbMlA1aiqJ0-xnHSL8sPh8JH2rp3w&usqp=CAU'/>},
