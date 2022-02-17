@@ -11,7 +11,9 @@ import {PostType} from "./components/Profile/MyPosts/Post/Post";
 import {DialogItemType} from "./components/Dialogs/DialogItem/DialogItem";
 import {MessagesType} from "./components/Dialogs/Message/Message";
 import DialogsContainer from "./components/Dialogs/DialogsContainer";
+import { UsersContainer } from './components/Users/UsersContainer';
 //wefwef
+
 
 export type ProfilePageType = {
     posts: Array<PostType>
@@ -62,6 +64,9 @@ const App: React.FC<AppType> = (props) => {
                         <Route
                             path='/settings'
                             element={<Settings/>}/>
+                        <Route
+                            path='/users'
+                            element={<UsersContainer/>}/>
                     </Routes>
                 </div>
             </div>

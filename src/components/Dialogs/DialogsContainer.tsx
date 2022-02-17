@@ -6,7 +6,7 @@ import {AppStateType} from "../../redux/redux-store";
 import {DialogsPageType} from "../../App";
 import {Dispatch} from "redux";
 
-export type DialogsContainerType = {}
+
 type MapStatePropsType = {
     dialogsPage: DialogsPageType
 }
