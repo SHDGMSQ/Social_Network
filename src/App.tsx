@@ -14,6 +14,9 @@ import DialogsContainer from "./components/Dialogs/DialogsContainer";
 import { UsersContainer } from './components/Users/UsersContainer';
 //wefwef
 
+// axios
+//     .get('https://blabla.com/users')
+//     .then( data => console.log(data) );
 
 export type ProfilePageType = {
     posts: Array<PostType>
@@ -40,6 +43,7 @@ export type StateType = {
 export type AppType = {
     state: StateType
 }
+
 
 
 const App: React.FC<AppType> = (props) => {
