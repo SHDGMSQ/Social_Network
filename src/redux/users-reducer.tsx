@@ -8,9 +8,9 @@ type UsersLocationType = {
 }
 export type UserType = {
     id: number,
-    photoUrl: string
+    photos: any
     followed: boolean
-    fullName: string
+    name: string
     status: string
     location: UsersLocationType
 }
@@ -37,7 +37,7 @@ export const usersReducer = (state: InitialStateType = initialState, action: Gen
             return {...state, users: state.users.map ( m => m.id === action.payload.userId ? {...m, followed: false}: m )}
         }
         case "SET-USERS": {
-            return {...state, users: [...state.users, ...action.payload.users]}
+            return {...state, users: [...action.payload.users]}
         }
         default: return state
     }
