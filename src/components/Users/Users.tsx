@@ -12,25 +12,35 @@ type UsersType = {
 
 
 export const Users = (props: UsersType) => {
-    if (props.usersPage.users.length === 0) {
+    let getUsers = () => {
+        if (props.usersPage.users.length === 0) {
 
-        axios.get('https://social-network.samuraijs.com/api/1.0/users').then( response => {
-            props.setUsers(response.data.items)
-        } );
+            axios.get('https://social-network.samuraijs.com/api/1.0/users').then(response => {
+                props.setUsers(response.data.items)
+            });
+        }
     }
 
+
     return <div>
+        <button onClick={getUsers}>Get Users</button>
         {
-            props.usersPage.users.map( m => <div key={m.id}>
+            props.usersPage.users.map(m => <div key={m.id}>
                 <span>
                     <div>
-                        <img src={m.photos.small !==null ? m.photos.small: 'https://cdn.pixabay.com/photo/2020/07/01/12/58/icon-5359553_1280.png'} className={s.userPhoto}/>
+                        <img
+                            src={m.photos.small !== null ? m.photos.small : 'https://cdn.pixabay.com/photo/2020/07/01/12/58/icon-5359553_1280.png'}
+                            className={s.userPhoto}/>
                     </div>
                     <div>
                         {
                             m.followed
-                            ? <button onClick={ () => {props.unfollow(m.id)} }>Unfollow</button>
-                            : <button onClick={ () => {props.follow(m.id)} }>Follow</button>
+                                ? <button onClick={() => {
+                                    props.unfollow(m.id)
+                                }}>Unfollow</button>
+                                : <button onClick={() => {
+                                    props.follow(m.id)
+                                }}>Follow</button>
                         }
 
                     </div>
@@ -45,7 +55,7 @@ export const Users = (props: UsersType) => {
                         <div>{"m.location.city"}</div>
                     </span>
                 </span>
-            </div> )
+            </div>)
         }
     </div>
 }
