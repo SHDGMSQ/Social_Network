@@ -1,31 +1,21 @@
 import React from "react";
 import s from './Users.module.css'
-import {InitialStateType, UserType} from "../../redux/users-reducer";
 import axios from "axios";
 
-type UsersType = {
-    usersPage: InitialStateType
-    follow: (userId: number) => void
-    unfollow: (userId: number) => void
-    setUsers: (users: Array<UserType>) => void
-}
+class Users extends React.Component<any, any> {
 
-
-export const Users = (props: UsersType) => {
-    let getUsers = () => {
-        if (props.usersPage.users.length === 0) {
-
+    constructor(props) {
+        super(props);
+            alert('NEW')
             axios.get('https://social-network.samuraijs.com/api/1.0/users').then(response => {
-                props.setUsers(response.data.items)
+                this.props.setUsers(response.data.items)
             });
-        }
     }
 
-
-    return <div>
-        <button onClick={getUsers}>Get Users</button>
-        {
-            props.usersPage.users.map(m => <div key={m.id}>
+    render() {
+        return <div>
+            {
+                this.props.usersPage.users.map(m => <div key={m.id}>
                 <span>
                     <div>
                         <img
@@ -36,16 +26,16 @@ export const Users = (props: UsersType) => {
                         {
                             m.followed
                                 ? <button onClick={() => {
-                                    props.unfollow(m.id)
+                                    this.props.unfollow(m.id)
                                 }}>Unfollow</button>
                                 : <button onClick={() => {
-                                    props.follow(m.id)
+                                    this.props.follow(m.id)
                                 }}>Follow</button>
                         }
 
                     </div>
                 </span>
-                <span>
+                    <span>
                     <span>
                         <div>{m.name}</div>
                         <div>{m.status}</div>
@@ -55,7 +45,10 @@ export const Users = (props: UsersType) => {
                         <div>{"m.location.city"}</div>
                     </span>
                 </span>
-            </div>)
-        }
-    </div>
+                </div>)
+            }
+        </div>;
+    }
 }
+
+export default Users
