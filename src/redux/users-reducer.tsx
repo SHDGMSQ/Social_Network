@@ -28,7 +28,7 @@ let initialState: InitialStateType =  {
     users: [],
     pageSize: 5,
     totalUsersCount: 0,
-    currentPage: 2,
+    currentPage: 1,
 
     /*[
         {id: 1, photoUrl: 'https://is5-ssl.mzstatic.com/image/thumb/Purple115/v4/6d/ec/06/6dec0611-3620-8289-55b5-7245ee6ea4d3/source/512x512bb.jpg', followed: false, fullName: 'Dmitry', status: 'I am a boss', location: {city: 'Minsk', country: 'Belarus'} },
