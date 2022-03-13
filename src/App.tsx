@@ -11,7 +11,7 @@ import {PostType} from "./components/Profile/MyPosts/Post/Post";
 import {DialogItemType} from "./components/Dialogs/DialogItem/DialogItem";
 import {MessagesType} from "./components/Dialogs/Message/Message";
 import DialogsContainer from "./components/Dialogs/DialogsContainer";
-import { UsersContainer } from './components/Users/UsersContainer';
+import {UsersContainer} from './components/Users/UsersContainer';
 //wefwef
 
 // axios
@@ -45,35 +45,34 @@ export type AppType = {
 }
 
 
-
 const App: React.FC<AppType> = (props) => {
     return (
-            <div className='app-wrapper'>
-                <Header/>
-                <Navbar state={props.state.sidebar}/>
-                <div className="app-wrapper-content">
-                    <Routes>
-                        <Route
-                            path='/profile'
-                            element={<Profile />}/>
-                        <Route
-                            path='/dialogs'
-                            element={<DialogsContainer />}/>
-                        <Route
-                            path='/news'
-                            element={<News/>}/>
-                        <Route
-                            path='/music'
-                            element={<Music/>}/>
-                        <Route
-                            path='/settings'
-                            element={<Settings/>}/>
-                        <Route
-                            path='/users'
-                            element={<UsersContainer/>}/>
-                    </Routes>
-                </div>
+        <div className='app-wrapper'>
+            <Header/>
+            <Navbar state={props.state.sidebar}/>
+            <div className="app-wrapper-content">
+                <Routes>
+                    <Route
+                        path='/profile'
+                        element={<Profile/>}/>
+                    <Route
+                        path='/dialogs'
+                        element={<DialogsContainer/>}/>
+                    <Route
+                        path='/news'
+                        element={<News/>}/>
+                    <Route
+                        path='/music'
+                        element={<Music/>}/>
+                    <Route
+                        path='/settings'
+                        element={<Settings/>}/>
+                    <Route
+                        path='/users'
+                        element={<UsersContainer/>}/>
+                </Routes>
             </div>
+        </div>
     );
 }
 

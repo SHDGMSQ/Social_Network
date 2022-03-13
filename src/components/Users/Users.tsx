@@ -70,5 +70,5 @@ export const Users = (props: UsersPropsType) => {
                 </div>)
             }
         </div>
-)
+    )
 }

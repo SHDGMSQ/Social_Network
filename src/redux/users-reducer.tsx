@@ -3,6 +3,7 @@ const UNFOLLOW = 'UNFOLLOW'
 const SET_USERS = 'SET-USERS'
 const SET_CURRENT_PAGE = 'SET-CURRENT-PAGE'
 const SET_USERS_TOTAL_COUNT = 'SET-USERS-TOTAL-COUNT'
+const TOGGLE_IS_FETCHING = 'TOGGLE-IS-FETCHING'
 
 type UsersLocationType = {
     city: string
@@ -21,14 +22,16 @@ export type InitialStateType = {
     pageSize: number
     totalUsersCount: number
     currentPage: number
+    isFetching: boolean
 }
 
 
-let initialState: InitialStateType =  {
+let initialState: InitialStateType = {
     users: [],
     pageSize: 5,
     totalUsersCount: 0,
     currentPage: 1,
+    isFetching: false
 
     /*[
         {id: 1, photoUrl: 'https://is5-ssl.mzstatic.com/image/thumb/Purple115/v4/6d/ec/06/6dec0611-3620-8289-55b5-7245ee6ea4d3/source/512x512bb.jpg', followed: false, fullName: 'Dmitry', status: 'I am a boss', location: {city: 'Minsk', country: 'Belarus'} },
@@ -41,10 +44,10 @@ export const usersReducer = (state: InitialStateType = initialState, action: Gen
 
     switch (action.type) {
         case "FOLLOW": {
-           return {...state, users: state.users.map ( m => m.id === action.payload.userId ? {...m, followed: true}: m )}
+            return {...state, users: state.users.map(m => m.id === action.payload.userId ? {...m, followed: true} : m)}
         }
         case "UNFOLLOW": {
-            return {...state, users: state.users.map ( m => m.id === action.payload.userId ? {...m, followed: false}: m )}
+            return {...state, users: state.users.map(m => m.id === action.payload.userId ? {...m, followed: false} : m)}
         }
         case "SET-USERS": {
             return {...state, users: [...action.payload.users]}
@@ -55,15 +58,20 @@ export const usersReducer = (state: InitialStateType = initialState, action: Gen
         case "SET-USERS-TOTAL-COUNT": {
             return {...state, totalUsersCount: action.payload.count}
         }
-        default: return state
+        case "TOGGLE-IS-FETCHING": {
+            return {...state, isFetching: action.payload.isFetching}
+        }
+        default:
+            return state
     }
 }
 
 type GeneralType = FollowACType
-| UnfollowACType
-| SetUsersACType
-| SetCurrentPageACType
-| SetUsersTotalCountAC
+    | UnfollowACType
+    | SetUsersACType
+    | SetCurrentPageACType
+    | SetUsersTotalCountACType
+    | ToggleIsFetchingACType
 
 type FollowACType = ReturnType<typeof followAC>
 export const followAC = (userId: number) => {
@@ -105,7 +113,7 @@ export const setCurrentPageAC = (currentPage: number) => {
     } as const
 }
 
-type SetUsersTotalCountAC = ReturnType<typeof setUsersTotalCountAC>
+type SetUsersTotalCountACType = ReturnType<typeof setUsersTotalCountAC>
 export const setUsersTotalCountAC = (count: number) => {
     return {
         type: SET_USERS_TOTAL_COUNT,
@@ -115,3 +123,12 @@ export const setUsersTotalCountAC = (count: number) => {
     } as const
 }
 
+type ToggleIsFetchingACType = ReturnType<typeof toggleIsFetchingAC>
+export const toggleIsFetchingAC = (isFetching: boolean) => {
+    return {
+        type: TOGGLE_IS_FETCHING,
+        payload: {
+            isFetching
+        }
+    } as const
+}
