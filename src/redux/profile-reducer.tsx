@@ -3,13 +3,15 @@ import { GeneralType } from "./store";
 
 const ADD_POST = 'ADD-POST'
 const ADD_TITLE_VALUE = 'ADD-TITLE-VALUE'
+const SET_USER_PROFILE = 'SET-USER-PROFILE'
 
 let initialState =  {
     posts: [
         {id: 1, message: 'Hi, how are you?', likesCount: 15},
         {id: 2, message: 'It\'s my first post', likesCount: 20},
     ],
-    newPostText: ''
+    newPostText: '',
+    profile: null,
 }
 
 export const profileReducer = (state: ProfilePageType = initialState, action: GeneralType): ProfilePageType => {
@@ -27,7 +29,9 @@ export const profileReducer = (state: ProfilePageType = initialState, action: Ge
         case ADD_TITLE_VALUE: {
             stateCopy.newPostText = action.payload.message
             return stateCopy
-
+        }
+        case 'SET-USER-PROFILE': {
+            return stateCopy.profile: action.payload.profile
         }
         default: return state
     }
@@ -49,6 +53,16 @@ export const addTitleValueAC = (message: string) => {
         type: ADD_TITLE_VALUE,
         payload: {
             message
+        }
+    } as const
+}
+
+export type setUserProfileType = ReturnType<typeof setUserProfile>
+export const setUserProfile = (profile) => {
+    return {
+        type: SET_USER_PROFILE,
+        payload: {
+            profile
         }
     } as const
 }

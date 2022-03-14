@@ -2,7 +2,6 @@ import React from 'react';
 import './App.css';
 import Header from "./components/Header/Header";
 import Navbar from "./components/Navbar/Navbar";
-import Profile from "./components/Profile/Profile";
 import {Route, Routes} from "react-router-dom";
 import Music from "./components/Music/Music";
 import News from "./components/News/News";
@@ -12,6 +11,7 @@ import {DialogItemType} from "./components/Dialogs/DialogItem/DialogItem";
 import {MessagesType} from "./components/Dialogs/Message/Message";
 import DialogsContainer from "./components/Dialogs/DialogsContainer";
 import {UsersContainer} from './components/Users/UsersContainer';
+import {ProfileContainer} from "./components/Profile/ProfileInfo/ProfileContainer";
 //wefwef
 
 // axios
@@ -21,6 +21,7 @@ import {UsersContainer} from './components/Users/UsersContainer';
 export type ProfilePageType = {
     posts: Array<PostType>
     newPostText: string
+    profile: any
 }
 export type DialogsPageType = {
     dialogs: Array<DialogItemType>
@@ -54,7 +55,7 @@ const App: React.FC<AppType> = (props) => {
                 <Routes>
                     <Route
                         path='/profile'
-                        element={<Profile/>}/>
+                        element={<ProfileContainer/>}/>
                     <Route
                         path='/dialogs'
                         element={<DialogsContainer/>}/>
