@@ -31,7 +31,7 @@ export const profileReducer = (state: ProfilePageType = initialState, action: Ge
             return stateCopy
         }
         case 'SET-USER-PROFILE': {
-            return stateCopy.profile: action.payload.profile
+            return {...state, profile: action.payload.profile}
         }
         default: return state
     }

@@ -17,22 +17,22 @@ const Navbar: React.FC<NavbarType> = (props) => {
     return (
         <nav className={s.nav}>
             <div className={s.item}>
-                <NavLink to="/profile" className={(Link) => Link.isActive ? s.activeLink : ''}>Profile</NavLink>
+                <NavLink to="/profile" activeClassName={s.activeLink}>Profile</NavLink>
             </div>
             <div className={s.item}>
-                <NavLink to="/dialogs" className={(Link) => Link.isActive ? s.activeLink : ''}>Messages</NavLink>
+                <NavLink to="/dialogs" activeClassName={s.activeLink}>Messages</NavLink>
             </div>
             <div className={s.item}>
-                <NavLink to="/news" className={(Link) => Link.isActive ? s.activeLink : ''}>News</NavLink>
+                <NavLink to="/news" activeClassName={s.activeLink}>News</NavLink>
             </div>
             <div className={s.item}>
-                <NavLink to="music" className={(Link) => Link.isActive ? s.activeLink : ''}>Music</NavLink>
+                <NavLink to="music" activeClassName={s.activeLink}>Music</NavLink>
             </div>
             <div className={s.item}>
-                <NavLink to="settings" className={(Link) => Link.isActive ? s.activeLink : ''}>Settings</NavLink>
+                <NavLink to="settings" activeClassName={s.activeLink}>Settings</NavLink>
             </div>
             <div className={s.item}>
-                <NavLink to="users" className={(Link) => Link.isActive ? s.activeLink : ''}>Find Users</NavLink>
+                <NavLink to="users" activeClassName={s.activeLink}>Find Users</NavLink>
             </div>
             <div className={s.friends}>
                 <h3>Friends</h3>

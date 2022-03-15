@@ -2,7 +2,7 @@ import React from 'react';
 import './App.css';
 import Header from "./components/Header/Header";
 import Navbar from "./components/Navbar/Navbar";
-import {Route, Routes} from "react-router-dom";
+import {BrowserRouter, HashRouter, Navigate, Route, Routes} from "react-router-dom";
 import Music from "./components/Music/Music";
 import News from "./components/News/News";
 import Settings from "./components/Settings/Settings";
@@ -12,6 +12,7 @@ import {MessagesType} from "./components/Dialogs/Message/Message";
 import DialogsContainer from "./components/Dialogs/DialogsContainer";
 import {UsersContainer} from './components/Users/UsersContainer';
 import {ProfileContainer} from "./components/Profile/ProfileInfo/ProfileContainer";
+import {ProfileType} from "./components/Profile/Profile";
 //wefwef
 
 // axios
@@ -21,7 +22,7 @@ import {ProfileContainer} from "./components/Profile/ProfileInfo/ProfileContaine
 export type ProfilePageType = {
     posts: Array<PostType>
     newPostText: string
-    profile: any
+    profile: ProfileType | null
 }
 export type DialogsPageType = {
     dialogs: Array<DialogItemType>
@@ -47,34 +48,22 @@ export type AppType = {
 
 
 const App: React.FC<AppType> = (props) => {
+
     return (
         <div className='app-wrapper'>
             <Header/>
             <Navbar state={props.state.sidebar}/>
             <div className="app-wrapper-content">
-                <Routes>
-                    <Route
-                        path='/profile'
-                        element={<ProfileContainer/>}/>
-                    <Route
-                        path='/dialogs'
-                        element={<DialogsContainer/>}/>
-                    <Route
-                        path='/news'
-                        element={<News/>}/>
-                    <Route
-                        path='/music'
-                        element={<Music/>}/>
-                    <Route
-                        path='/settings'
-                        element={<Settings/>}/>
-                    <Route
-                        path='/users'
-                        element={<UsersContainer/>}/>
-                </Routes>
+                    <Route path='/profile' component={ProfileContainer}/>
+                    <Route path='/dialogs' component={DialogsContainer}/>
+                    <Route path='/news' component={News}/>
+                    <Route path='/music' component={Music}/>
+                    <Route path='/settings' component={Settings}/>
+                    <Route path='/users' component={UsersContainer}/>
             </div>
         </div>
     );
 }
+
 
 export default App;
