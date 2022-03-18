@@ -1,19 +1,18 @@
 import React from 'react';
 import './App.css';
-import Header from "./components/Header/Header";
-import Navbar from "./components/Navbar/Navbar";
-import {Route} from "react-router-dom";
-import Music from "./components/Music/Music";
-import News from "./components/News/News";
-import Settings from "./components/Settings/Settings";
-import {PostType} from "./components/Profile/MyPosts/Post/Post";
-import {DialogItemType} from "./components/Dialogs/DialogItem/DialogItem";
-import {MessagesType} from "./components/Dialogs/Message/Message";
-import DialogsContainer from "./components/Dialogs/DialogsContainer";
+import Navbar from './components/Navbar/Navbar';
+import {Route} from 'react-router-dom';
+import Music from './components/Music/Music';
+import News from './components/News/News';
+import Settings from './components/Settings/Settings';
+import {PostType} from './components/Profile/MyPosts/Post/Post';
+import {DialogItemType} from './components/Dialogs/DialogItem/DialogItem';
+import {MessagesType} from './components/Dialogs/Message/Message';
+import DialogsContainer from './components/Dialogs/DialogsContainer';
 import {UsersContainer} from './components/Users/UsersContainer';
-import {ProfileContainer} from "./components/Profile/ProfileInfo/ProfileContainer";
-import {ProfileType} from "./components/Profile/Profile";
-//wefwef
+import {ProfileContainer} from './components/Profile/ProfileInfo/ProfileContainer';
+import {ProfileType} from './components/Profile/Profile';
+import {HeaderContainer} from './components/Header/HeaderContainer';
 
 // axios
 //     .get('https://blabla.com/users')
@@ -51,9 +50,10 @@ const App: React.FC<AppType> = (props) => {
 
     return (
         <div className='app-wrapper'>
-            <Header/>
+            <HeaderContainer/>
             <Navbar state={props.state.sidebar}/>
             <div className="app-wrapper-content">
+                <Route path='/Social_Network' render={ () => <ProfileContainer/>}/>
                 <Route path='/profile/:userId?' render={ () => <ProfileContainer/>}/>
                 <Route path='/dialogs' render={ () => <DialogsContainer/>}/>
                 <Route path='/news' render={ () => <News/>}/>
