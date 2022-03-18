@@ -26,13 +26,13 @@ const Navbar: React.FC<NavbarType> = (props) => {
                 <NavLink to="/news" activeClassName={s.activeLink}>News</NavLink>
             </div>
             <div className={s.item}>
-                <NavLink to="music" activeClassName={s.activeLink}>Music</NavLink>
+                <NavLink to="/music" activeClassName={s.activeLink}>Music</NavLink>
             </div>
             <div className={s.item}>
-                <NavLink to="settings" activeClassName={s.activeLink}>Settings</NavLink>
+                <NavLink to="/settings" activeClassName={s.activeLink}>Settings</NavLink>
             </div>
             <div className={s.item}>
-                <NavLink to="users" activeClassName={s.activeLink}>Find Users</NavLink>
+                <NavLink to="/users" activeClassName={s.activeLink}>Find Users</NavLink>
             </div>
             <div className={s.friends}>
                 <h3>Friends</h3>
