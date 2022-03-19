@@ -1,7 +1,8 @@
-import s from "./Users.module.css";
-import React from "react";
-import {InitialStateType} from "../../redux/users-reducer";
-import {NavLink} from "react-router-dom";
+import s from './Users.module.css';
+import React from 'react';
+import {InitialStateType} from '../../redux/users-reducer';
+import {NavLink} from 'react-router-dom';
+import axios from 'axios';
 
 
 type UsersPropsType = {
@@ -16,13 +17,15 @@ type UsersPropsType = {
 
 export const Users = (props: UsersPropsType) => {
 
-    let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize)
+    let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize);
 
-    let pages: number[] = []
+    let pages: number[] = [];
     for (let i = 1; i <= pagesCount; i++) {
         if (i)
-            pages.push(i)
+            pages.push(i);
     }
+
+
     return (
         <div>
             <div>
@@ -31,9 +34,9 @@ export const Users = (props: UsersPropsType) => {
                         return <span key={i}
                                      className={props.currentPage === m ? s.selectedPage : ''}
                                      onClick={(e) => {
-                                         props.onPageChanged(m)
+                                         props.onPageChanged(m);
                                      }}
-                        >{m}</span>
+                        >{m}</span>;
                     })
                 }
             </div>
@@ -51,10 +54,32 @@ export const Users = (props: UsersPropsType) => {
                         {
                             m.followed
                                 ? <button onClick={() => {
-                                    props.unfollow(m.id)
+
+                                    axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${m.id}`, {
+                                        withCredentials: true,
+                                        headers: {
+                                            'API-KEY': 'b365fbe8-0446-4f2a-ad5f-3c9421879b5e'
+                                        }
+                                    }).then(response => {
+                                        if (response.data.resultCode === 0) {
+                                            props.unfollow(m.id);
+                                        }
+                                    });
+
                                 }}>Unfollow</button>
                                 : <button onClick={() => {
-                                    props.follow(m.id)
+
+                                    axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${m.id}`, {}, {
+                                        withCredentials: true,
+                                        headers: {
+                                            'API-KEY': 'b365fbe8-0446-4f2a-ad5f-3c9421879b5e'
+                                        }
+                                    }).then(response => {
+                                        if (response.data.resultCode === 0) {
+                                            props.follow(m.id);
+                                        }
+                                    });
+
                                 }}>Follow</button>
                         }
 
@@ -66,12 +91,12 @@ export const Users = (props: UsersPropsType) => {
                         <div>{m.status}</div>
                     </span>
                     <span>
-                        <div>{"m.location.country"}</div>
-                        <div>{"m.location.city"}</div>
+                        <div>{'m.location.country'}</div>
+                        <div>{'m.location.city'}</div>
                     </span>
                 </span>
                 </div>)
             }
         </div>
-    )
-}
+    );
+};
