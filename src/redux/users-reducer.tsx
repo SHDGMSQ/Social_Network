@@ -1,9 +1,10 @@
-const FOLLOW = 'FOLLOW'
-const UNFOLLOW = 'UNFOLLOW'
-const SET_USERS = 'SET-USERS'
-const SET_CURRENT_PAGE = 'SET-CURRENT-PAGE'
-const SET_USERS_TOTAL_COUNT = 'SET-USERS-TOTAL-COUNT'
-const TOGGLE_IS_FETCHING = 'TOGGLE-IS-FETCHING'
+const FOLLOW = 'FOLLOW';
+const UNFOLLOW = 'UNFOLLOW';
+const SET_USERS = 'SET-USERS';
+const SET_CURRENT_PAGE = 'SET-CURRENT-PAGE';
+const SET_USERS_TOTAL_COUNT = 'SET-USERS-TOTAL-COUNT';
+const TOGGLE_IS_FETCHING = 'TOGGLE-IS-FETCHING';
+const TOGGLE_IS_FOLLOWING_PROGRESS = 'TOGGLE-IS-FOLLOWING-PROGRESS';
 
 type UsersLocationType = {
     city: string
@@ -23,6 +24,7 @@ export type InitialStateType = {
     totalUsersCount: number
     currentPage: number
     isFetching: boolean
+    followingInProgress: number[]
 }
 
 
@@ -31,40 +33,46 @@ let initialState: InitialStateType = {
     pageSize: 5,
     totalUsersCount: 0,
     currentPage: 1,
-    isFetching: false
+    isFetching: false,
+    followingInProgress: []
 
-    /*[
-        {id: 1, photoUrl: 'https://is5-ssl.mzstatic.com/image/thumb/Purple115/v4/6d/ec/06/6dec0611-3620-8289-55b5-7245ee6ea4d3/source/512x512bb.jpg', followed: false, fullName: 'Dmitry', status: 'I am a boss', location: {city: 'Minsk', country: 'Belarus'} },
-        {id: 1, photoUrl: 'https://is5-ssl.mzstatic.com/image/thumb/Purple115/v4/6d/ec/06/6dec0611-3620-8289-55b5-7245ee6ea4d3/source/512x512bb.jpg', followed: true, fullName: 'Sasha', status: 'I am a boss too', location: {city: 'Moscow', country: 'Russia'} },
-        {id: 1, photoUrl: 'https://is5-ssl.mzstatic.com/image/thumb/Purple115/v4/6d/ec/06/6dec0611-3620-8289-55b5-7245ee6ea4d3/source/512x512bb.jpg', followed: false, fullName: 'Andrew', status: 'I am a boss too', location: {city: 'Kiev', country: 'Ukraine'} },
-    ],*/
-}
+};
 
 export const usersReducer = (state: InitialStateType = initialState, action: GeneralType): InitialStateType => {
 
     switch (action.type) {
-        case "FOLLOW": {
-            return {...state, users: state.users.map(m => m.id === action.payload.userId ? {...m, followed: true} : m)}
+        case 'FOLLOW': {
+            return {...state, users: state.users.map(m => m.id === action.payload.userId ? {...m, followed: true} : m)};
         }
-        case "UNFOLLOW": {
-            return {...state, users: state.users.map(m => m.id === action.payload.userId ? {...m, followed: false} : m)}
+        case 'UNFOLLOW': {
+            return {
+                ...state,
+                users: state.users.map(m => m.id === action.payload.userId ? {...m, followed: false} : m)
+            };
         }
-        case "SET-USERS": {
-            return {...state, users: [...action.payload.users]}
+        case 'SET-USERS': {
+            return {...state, users: [...action.payload.users]};
         }
-        case "SET-CURRENT-PAGE": {
-            return {...state, currentPage: action.payload.currentPage}
+        case 'SET-CURRENT-PAGE': {
+            return {...state, currentPage: action.payload.currentPage};
         }
-        case "SET-USERS-TOTAL-COUNT": {
-            return {...state, totalUsersCount: action.payload.count}
+        case 'SET-USERS-TOTAL-COUNT': {
+            return {...state, totalUsersCount: action.payload.count};
         }
-        case "TOGGLE-IS-FETCHING": {
-            return {...state, isFetching: action.payload.isFetching}
+        case 'TOGGLE-IS-FETCHING': {
+            return {...state, isFetching: action.payload.isFetching};
+        }
+        case 'TOGGLE-IS-FOLLOWING-PROGRESS': {
+            return {...state,
+                followingInProgress: action.payload.isFollowing
+                    ? [...state.followingInProgress, action.payload.userId]
+                    :state.followingInProgress.filter(id => id !== action.payload.userId)
+            };
         }
         default:
-            return state
+            return state;
     }
-}
+};
 
 type GeneralType = FollowType
     | UnfollowType
@@ -72,6 +80,7 @@ type GeneralType = FollowType
     | SetCurrentPageType
     | SetUsersTotalCountType
     | ToggleIsFetchingType
+    | ToggleIsFollowingProgressType
 
 type FollowType = ReturnType<typeof follow>
 export const follow = (userId: number) => {
@@ -80,8 +89,8 @@ export const follow = (userId: number) => {
         payload: {
             userId
         }
-    } as const
-}
+    } as const;
+};
 
 type UnfollowType = ReturnType<typeof unfollow>
 export const unfollow = (userId: number) => {
@@ -90,8 +99,8 @@ export const unfollow = (userId: number) => {
         payload: {
             userId
         }
-    } as const
-}
+    } as const;
+};
 
 type SetUsersType = ReturnType<typeof setUsers>
 export const setUsers = (users: Array<UserType>) => {
@@ -100,8 +109,8 @@ export const setUsers = (users: Array<UserType>) => {
         payload: {
             users
         }
-    } as const
-}
+    } as const;
+};
 
 type SetCurrentPageType = ReturnType<typeof setCurrentPage>
 export const setCurrentPage = (currentPage: number) => {
@@ -110,8 +119,8 @@ export const setCurrentPage = (currentPage: number) => {
         payload: {
             currentPage
         }
-    } as const
-}
+    } as const;
+};
 
 type SetUsersTotalCountType = ReturnType<typeof setUsersTotalCount>
 export const setUsersTotalCount = (count: number) => {
@@ -120,8 +129,8 @@ export const setUsersTotalCount = (count: number) => {
         payload: {
             count
         }
-    } as const
-}
+    } as const;
+};
 
 type ToggleIsFetchingType = ReturnType<typeof toggleIsFetching>
 export const toggleIsFetching = (isFetching: boolean) => {
@@ -130,5 +139,16 @@ export const toggleIsFetching = (isFetching: boolean) => {
         payload: {
             isFetching
         }
-    } as const
-}
+    } as const;
+};
+
+type ToggleIsFollowingProgressType = ReturnType<typeof toggleIsFollowingProgress>
+export const toggleIsFollowingProgress = (isFollowing: boolean, userId: number) => {
+    return {
+        type: TOGGLE_IS_FOLLOWING_PROGRESS,
+        payload: {
+            isFollowing,
+            userId
+        }
+    } as const;
+};
