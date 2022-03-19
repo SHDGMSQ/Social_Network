@@ -1,5 +1,5 @@
-import React from "react";
-import {connect} from "react-redux";
+import React from 'react';
+import {connect} from 'react-redux';
 import {
     follow,
     InitialStateType,
@@ -8,11 +8,11 @@ import {
     setUsersTotalCount,
     toggleIsFetching,
     unfollow,
-} from "../../redux/users-reducer";
-import {AppStateType} from "../../redux/redux-store";
-import axios from "axios";
-import {Users} from "./Users";
-import {Preloader} from "../common/preloader/Preloader";
+} from '../../redux/users-reducer';
+import {AppStateType} from '../../redux/redux-store';
+import {Users} from './Users';
+import {Preloader} from '../common/preloader/Preloader';
+import {usersAPI} from '../../api/api';
 
 
 type MapStateToPropsType = {
@@ -28,23 +28,20 @@ class UsersAPIComponent extends React.Component<any, any> {
 
     componentDidMount() {
         this.props.toggleIsFetching(true)
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`, {
-            withCredentials: true
-        }).then(response => {
+
+        usersAPI.getUsers(this.props.currentPage, this.props.pageSize).then(data => {
             this.props.toggleIsFetching(false)
-            this.props.setUsers(response.data.items)
-            this.props.setTotalUsersCount(response.data.totalCount)
+            this.props.setUsers(data.items)
+            this.props.setTotalUsersCount(data.totalCount)
         });
     }
 
     onPageChanged = (pageNumber) => {
         this.props.setCurrentPage(pageNumber)
         this.props.toggleIsFetching(true)
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`, {
-            withCredentials: true
-        }).then(response => {
+        usersAPI.getUsers(pageNumber, this.props.pageSize).then(data => {
             this.props.toggleIsFetching(false)
-            this.props.setUsers(response.data.items)
+            this.props.setUsers(data.items)
         });
     }
 

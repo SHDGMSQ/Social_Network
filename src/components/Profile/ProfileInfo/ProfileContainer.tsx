@@ -1,10 +1,10 @@
-import React from "react";
-import Profile, {ProfileType} from "../Profile";
-import axios from "axios";
-import {connect} from "react-redux";
-import {AppStateType} from "../../../redux/redux-store";
-import {setUserProfile} from "../../../redux/profile-reducer";
-import {withRouter} from 'react-router-dom'
+import React from 'react';
+import Profile, {ProfileType} from '../Profile';
+import {connect} from 'react-redux';
+import {AppStateType} from '../../../redux/redux-store';
+import {setUserProfile} from '../../../redux/profile-reducer';
+import {withRouter} from 'react-router-dom';
+import {usersAPI} from '../../../api/api';
 
 
 type ProfileContainerPropsType = {}
@@ -19,8 +19,8 @@ export class ProfileAPIContainer extends React.Component<any, any> {
         if (!userId) {
             userId = '2'
         }
-        axios.get(`https://social-network.samuraijs.com/api/1.0/profile/${userId}`).then(response => {
-            this.props.setUserProfile(response.data)
+        usersAPI.getProfile(userId).then(data => {
+            this.props.setUserProfile(data)
         });
     }
 
