@@ -1,5 +1,6 @@
-import {ProfilePageType} from "../App";
-import { GeneralType } from "./store";
+import {ProfilePageType} from '../App';
+import {GeneralType} from './store';
+import {usersAPI} from '../api/api';
 
 const ADD_POST = 'ADD-POST'
 const ADD_TITLE_VALUE = 'ADD-TITLE-VALUE'
@@ -57,13 +58,23 @@ export const addTitleValueAC = (message: string) => {
     } as const
 }
 
-export type setUserProfileType = ReturnType<typeof setUserProfile>
-export const setUserProfile = (profile) => {
+export type setUserProfileType = ReturnType<typeof setUserProfileSuccess>
+export const setUserProfileSuccess = (profile) => {
     return {
         type: SET_USER_PROFILE,
         payload: {
             profile
         }
     } as const
+}
+
+export const setUserProfile = (userId) => {
+
+    return (dispatch) => {
+
+        usersAPI.getProfile(userId).then(data => {
+            dispatch(setUserProfileSuccess(data))
+        });
+    }
 }
 

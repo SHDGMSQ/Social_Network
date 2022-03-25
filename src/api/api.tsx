@@ -24,14 +24,14 @@ export const usersAPI = {
                 return response.data;
             });
     },
-    unfollowAtUser: (userId) => {
+    unfollow: (userId) => {
 
         return instance.delete(`follow/${userId}`)
             .then(response => {
                 return response.data
             })
     },
-    followAtUser: (userId) => {
+    follow: (userId) => {
 
 
         return instance.post(`follow/${userId}`)
@@ -39,5 +39,11 @@ export const usersAPI = {
                 return response.data
             })
     },
+    getAuth: () => {
+        return instance.get(`auth/me`)
+        .then(response => {
+            return response.data
+        });
+    }
 }
 

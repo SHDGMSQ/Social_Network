@@ -4,7 +4,6 @@ import {connect} from 'react-redux';
 import {AppStateType} from '../../../redux/redux-store';
 import {setUserProfile} from '../../../redux/profile-reducer';
 import {withRouter} from 'react-router-dom';
-import {usersAPI} from '../../../api/api';
 
 
 type ProfileContainerPropsType = {}
@@ -19,9 +18,7 @@ export class ProfileAPIContainer extends React.Component<any, any> {
         if (!userId) {
             userId = '2'
         }
-        usersAPI.getProfile(userId).then(data => {
-            this.props.setUserProfile(data)
-        });
+        this.props.setUserProfile(userId)
     }
 
     render() {

@@ -1,3 +1,5 @@
+import {usersAPI} from '../api/api';
+
 const FOLLOW = 'FOLLOW';
 const UNFOLLOW = 'UNFOLLOW';
 const SET_USERS = 'SET-USERS';
@@ -82,8 +84,8 @@ type GeneralType = FollowType
     | ToggleIsFetchingType
     | ToggleIsFollowingProgressType
 
-type FollowType = ReturnType<typeof follow>
-export const follow = (userId: number) => {
+type FollowType = ReturnType<typeof followSuccess>
+export const followSuccess = (userId: number) => {
     return {
         type: FOLLOW,
         payload: {
@@ -92,8 +94,8 @@ export const follow = (userId: number) => {
     } as const;
 };
 
-type UnfollowType = ReturnType<typeof unfollow>
-export const unfollow = (userId: number) => {
+type UnfollowType = ReturnType<typeof unfollowSuccess>
+export const unfollowSuccess = (userId: number) => {
     return {
         type: UNFOLLOW,
         payload: {
@@ -152,3 +154,45 @@ export const toggleIsFollowingProgress = (isFollowing: boolean, userId: number) 
         }
     } as const;
 };
+
+export const getUsers = (currentPage, pageSize) => {
+
+    return (dispatch) => {
+
+        dispatch(toggleIsFetching(true))
+
+        usersAPI.getUsers(currentPage, pageSize).then(data => {
+            dispatch(toggleIsFetching(false))
+            dispatch(setUsers(data.items))
+            dispatch(setUsersTotalCount(data.totalCount))
+        });
+    }
+}
+
+
+export const follow = (userId) => {
+
+    return (dispatch) => {
+
+        dispatch(toggleIsFollowingProgress(true, userId));
+        usersAPI.follow(userId).then(data => {
+            if (data.resultCode === 0) {
+                dispatch(followSuccess(userId));
+            }
+            dispatch(toggleIsFollowingProgress(false, userId));
+        });
+}
+}
+export const unfollow = (userId) => {
+
+    return (dispatch) => {
+
+        dispatch(toggleIsFollowingProgress(true, userId));
+        usersAPI.unfollow(userId).then(data => {
+            if (data.resultCode === 0) {
+                dispatch(unfollowSuccess(userId));
+            }
+            dispatch(toggleIsFollowingProgress(false, userId));
+        });
+    }
+}
