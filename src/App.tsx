@@ -14,10 +14,6 @@ import {ProfileContainer} from './components/Profile/ProfileInfo/ProfileContaine
 import {ProfileType} from './components/Profile/Profile';
 import {HeaderContainer} from './components/Header/HeaderContainer';
 
-// axios
-//     .get('https://blabla.com/users')
-//     .then( data => console.log(data) );
-
 export type ProfilePageType = {
     posts: Array<PostType>
     newPostText: string
