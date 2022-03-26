@@ -58,8 +58,8 @@ export const addTitleValueAC = (message: string) => {
     } as const
 }
 
-export type setUserProfileType = ReturnType<typeof setUserProfileSuccess>
-export const setUserProfileSuccess = (profile) => {
+export type setUserProfileType = ReturnType<typeof setUserProfile>
+export const setUserProfile = (profile) => {
     return {
         type: SET_USER_PROFILE,
         payload: {
@@ -68,12 +68,12 @@ export const setUserProfileSuccess = (profile) => {
     } as const
 }
 
-export const setUserProfile = (userId) => {
+export const getUserProfile = (userId) => {
 
     return (dispatch) => {
 
         usersAPI.getProfile(userId).then(data => {
-            dispatch(setUserProfileSuccess(data))
+            dispatch(setUserProfile(data))
         });
     }
 }

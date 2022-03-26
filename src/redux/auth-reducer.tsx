@@ -1,4 +1,4 @@
-import {usersAPI} from '../api/api';
+import {authAPI, usersAPI} from '../api/api';
 
 const SET_USER_DATA = 'SET-USER-DATA';
 
@@ -47,8 +47,8 @@ export const authReducer = (state: InitialStateAuthType = initialState, action: 
 
 type GeneralType = setAuthUserDataType
 
-type setAuthUserDataType = ReturnType<typeof setAuthUserDataSuccess>
-export const setAuthUserDataSuccess = (data: InitialStateAuthType) => {
+type setAuthUserDataType = ReturnType<typeof setAuthUserData>
+export const setAuthUserData = (data: InitialStateAuthType) => {
     return {
         type: SET_USER_DATA,
         payload: {
@@ -57,14 +57,16 @@ export const setAuthUserDataSuccess = (data: InitialStateAuthType) => {
     } as const;
 };
 
-export const setAuthUserData = () => {
+export const getAuthUserData = () => {
 
     return (dispatch) => {
 
-        usersAPI.getAuth().then(data => {
-            if (data.resultCode === 0) {
-                dispatch(setAuthUserDataSuccess(data));
-            }
-        });
-    }
-}
+        authAPI.me()
+            .then(data => {
+                if (data.resultCode === 0) {
+
+                    dispatch(setAuthUserData(data.data));
+                }
+            });
+    };
+};
