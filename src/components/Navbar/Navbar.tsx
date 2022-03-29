@@ -23,7 +23,7 @@ const Navbar: React.FC<NavbarType> = (props) => {
                 <NavLink to="/dialogs" activeClassName={s.activeLink}>Messages</NavLink>
             </div>
             <div className={s.item}>
-                <NavLink to="/news" activeClassName={s.activeLink}>News</NavLink>
+                {/*<NavLink to="/news" activeClassName={s.activeLink}>News</NavLink>*/}
             </div>
             <div className={s.item}>
                 <NavLink to="/music" activeClassName={s.activeLink}>Music</NavLink>
