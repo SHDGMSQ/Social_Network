@@ -155,7 +155,7 @@ export const toggleIsFollowingProgress = (isFollowing: boolean, userId: number) 
     } as const;
 };
 
-export const getUsers = (currentPage, pageSize) => {
+export const getUsers = (currentPage: number, pageSize: number) => {
 
     return (dispatch) => {
 

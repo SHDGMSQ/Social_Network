@@ -1,6 +1,7 @@
 import {ProfilePageType} from '../App';
 import {GeneralType} from './store';
 import {usersAPI} from '../api/api';
+import {ProfileType} from '../components/Profile/Profile';
 
 const ADD_POST = 'ADD-POST'
 const ADD_TITLE_VALUE = 'ADD-TITLE-VALUE'
@@ -59,7 +60,7 @@ export const addTitleValueAC = (message: string) => {
 }
 
 export type setUserProfileType = ReturnType<typeof setUserProfile>
-export const setUserProfile = (profile) => {
+export const setUserProfile = (profile: ProfileType) => {
     return {
         type: SET_USER_PROFILE,
         payload: {
@@ -68,7 +69,7 @@ export const setUserProfile = (profile) => {
     } as const
 }
 
-export const getUserProfile = (userId) => {
+export const getUserProfile = (userId: string) => {
 
     return (dispatch) => {
 

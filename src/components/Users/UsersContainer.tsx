@@ -12,9 +12,38 @@ import {AppStateType} from '../../redux/redux-store';
 import {Users} from './Users';
 import {Preloader} from '../common/preloader/Preloader';
 import {WithAuthRedirect} from '../../hoc/WithAuthRedirect';
+import {compose} from 'redux';
+import {ProfileType} from '../Profile/Profile';
+import {RouteComponentProps } from 'react-router-dom';
 
 
-class UsersAPIComponent extends React.Component<any, any> {
+
+type UsersContainerPropsType = RouteComponentProps<PathParamsPropsType & OwnPropsType>
+
+type PathParamsPropsType = {
+    userId: string
+}
+type MapStateToPropsType = {
+    usersPage: InitialStateType
+    pageSize: number
+    totalUsersCount: number
+    currentPage: number
+    isFetching: boolean
+    isFollowing: number[]
+}
+type MapDispatchToPropsType = {
+    follow: (userId: number) => void
+    unfollow: (userId: number) => void
+    setCurrentPage: (currentPage: number) => void
+    toggleIsFollowingProgress: (isFollowing: boolean, userId: number) => void
+    getUsers: (currentPage: number, pageSize: number) => void
+}
+
+
+type OwnPropsType = MapStateToPropsType & MapDispatchToPropsType
+
+
+class UsersContainer extends React.Component<UsersContainerPropsType> {
 
 
     componentDidMount() {
@@ -22,7 +51,7 @@ class UsersAPIComponent extends React.Component<any, any> {
         this.props.getUsers(this.props.currentPage, this.props.pageSize)
     }
 
-    onPageChanged = (pageNumber) => {
+    onPageChanged = (pageNumber: number) => {
 
         this.props.getUsers(pageNumber, this.props.pageSize)
     }
@@ -44,14 +73,7 @@ class UsersAPIComponent extends React.Component<any, any> {
     }
 }
 
-type MapStateToPropsType = {
-    usersPage: InitialStateType
-    pageSize: number
-    totalUsersCount: number
-    currentPage: number
-    isFetching: boolean
-    isFollowing: number[]
-}
+
 const mapStateToProps = (state: AppStateType): MapStateToPropsType => {
     return {
         usersPage: state.usersPage,
@@ -63,12 +85,15 @@ const mapStateToProps = (state: AppStateType): MapStateToPropsType => {
     }
 }
 
-let withRedirect = WithAuthRedirect(UsersAPIComponent)
 
-export const UsersContainer = connect(mapStateToProps, {
-    follow,
-    unfollow,
-    setCurrentPage,
-    toggleIsFollowingProgress,
-    getUsers,
-})(withRedirect)
+export default compose<React.ComponentType>(
+    WithAuthRedirect,
+    connect(mapStateToProps, {
+        follow,
+        unfollow,
+        setCurrentPage,
+        toggleIsFollowingProgress,
+        getUsers,
+    }),
+)(UsersContainer)
+

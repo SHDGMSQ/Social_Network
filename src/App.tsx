@@ -8,12 +8,12 @@ import Settings from './components/Settings/Settings';
 import {PostType} from './components/Profile/MyPosts/Post/Post';
 import {DialogItemType} from './components/Dialogs/DialogItem/DialogItem';
 import {MessagesType} from './components/Dialogs/Message/Message';
-import DialogsContainer from './components/Dialogs/DialogsContainer';
-import {UsersContainer} from './components/Users/UsersContainer';
-import {ProfileContainer} from './components/Profile/ProfileInfo/ProfileContainer';
 import {ProfileType} from './components/Profile/Profile';
 import {HeaderContainer} from './components/Header/HeaderContainer';
 import {Login} from './components/Login/Login';
+import UsersContainer from './components/Users/UsersContainer';
+import DialogsContainer from './components/Dialogs/DialogsContainer';
+import ProfileContainer from './components/Profile/ProfileInfo/ProfileContainer';
 
 export type ProfilePageType = {
     posts: Array<PostType>
