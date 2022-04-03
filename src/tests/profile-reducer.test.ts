@@ -10,7 +10,8 @@ beforeEach(() => {
             {id: 2, message: 'It\'s my first post', likesCount: 20},
         ],
         newPostText: '',
-        profile: null
+        profile: null,
+        status: '',
     }
 })
 

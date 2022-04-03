@@ -19,6 +19,7 @@ export type ProfilePageType = {
     posts: Array<PostType>
     newPostText: string
     profile: ProfileType | null
+    status: string
 }
 export type DialogsPageType = {
     dialogs: Array<DialogItemType>
