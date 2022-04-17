@@ -3,9 +3,8 @@ import Profile, {ProfileType} from '../Profile';
 import {connect} from 'react-redux';
 import {AppStateType} from '../../../redux/redux-store';
 import {getStatus, getUserProfile, updateStatus} from '../../../redux/profile-reducer';
-import {withRouter, RouteComponentProps } from 'react-router-dom';
-import {WithAuthRedirect} from '../../../hoc/WithAuthRedirect';
-import { compose } from 'redux';
+import {RouteComponentProps, withRouter} from 'react-router-dom';
+import {compose} from 'redux';
 
 
 type ProfileContainerPropsType = RouteComponentProps<PathParamsPropsType & OwnPropsType>

@@ -44,6 +44,8 @@ export type AppType = {
 }
 
 
+//new init
+
 const App: React.FC<AppType> = (props) => {
 
     return (

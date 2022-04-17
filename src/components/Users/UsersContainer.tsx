@@ -13,9 +13,7 @@ import {Users} from './Users';
 import {Preloader} from '../common/preloader/Preloader';
 import {WithAuthRedirect} from '../../hoc/WithAuthRedirect';
 import {compose} from 'redux';
-import {ProfileType} from '../Profile/Profile';
-import {RouteComponentProps } from 'react-router-dom';
-
+import {RouteComponentProps} from 'react-router-dom';
 
 
 type UsersContainerPropsType = RouteComponentProps<PathParamsPropsType & OwnPropsType>
